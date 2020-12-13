@@ -1,6 +1,6 @@
 package nl.tudelft.ewi.abs.nonnenmacher.gandiva
 
-import io.netty.buffer.ArrowBuf
+import org.apache.arrow.memory.ArrowBuf
 import nl.tudelft.ewi.abs.nonnenmacher.columnar.ArrowColumnarConverters._
 import nl.tudelft.ewi.abs.nonnenmacher.columnar.selection.ColumnarWithSelectionVectorSupport
 import nl.tudelft.ewi.abs.nonnenmacher.utils.AutoCloseProcessingHelper._

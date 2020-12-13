@@ -2,7 +2,7 @@ package nl.tudelft.ewi.abs.nonnenmacher
 
 import java.util.logging.Logger
 
-import io.netty.buffer.ArrowBuf
+import org.apache.arrow.memory.ArrowBuf
 import nl.tudelft.ewi.abs.nonnenmacher.utils.ClosableFunction
 import org.apache.arrow.gandiva.evaluator.NativeLibraryLoader
 import org.apache.arrow.gandiva.expression.ArrowTypeHelper

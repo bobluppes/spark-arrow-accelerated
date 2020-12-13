@@ -35,27 +35,27 @@ RUN wget -q https://github.com/protocolbuffers/protobuf/releases/download/v3.7.1
         rm -rf /protobuf
 
 # Download & install apache arrow and gandiva jar file
-RUN wget -q http://apache.40b.nl/arrow/arrow-0.17.1/apache-arrow-0.17.1.tar.gz &&\
+RUN wget -q http://apache.40b.nl/arrow/arrow-1.0.0/apache-arrow-1.0.0.tar.gz &&\
         mkdir /arrow &&\
-        tar -xzf apache-arrow-0.17.1.tar.gz --strip-components 1 -C /arrow &&\
-        rm -f apache-arrow-0.17.1.tar.gz &&\
+        tar -xzf apache-arrow-1.0.0.tar.gz --strip-components 1 -C /arrow &&\
+        rm -f apache-arrow-1.0.0.tar.gz &&\
         mkdir /arrow/cpp/release &&\
         cd /arrow/cpp/release &&\
-        cmake -DARROW_PARQUET=ON -DARROW_GANDIVA=ON -DARROW_GANDIVA_JAVA=ON -DARROW_DATASET=ON -DARROW_WITH_SNAPPY=ON .. &&\
+        cmake -DARROW_PARQUET=ON -DARROW_GANDIVA=ON -DARROW_GANDIVA_JAVA=ON -DARROW_DATASET=ON -DARROW_CSV=ON -DARROW_WITH_SNAPPY=ON .. &&\
         make &&\
         make install &&\
         cd /arrow/java &&\
         mvn clean install -pl gandiva -P arrow-jni -am -DskipTests -Darrow.cpp.build.dir=../../cpp/release/release &&\
         mkdir /gandiva-jar &&\
-        cp /arrow/java/gandiva/target/arrow-gandiva-0.17.1.jar /gandiva-jar/arrow-gandiva-0.17.1.jar &&\
+        cp /arrow/java/gandiva/target/arrow-gandiva-1.0.0.jar /gandiva-jar/arrow-gandiva-1.0.0.jar &&\
         cd /gandiva-jar &&\
         rm -rf /arrow
 
 # Download Fletcher
-RUN wget -q https://github.com/abs-tudelft/fletcher/archive/develop.zip &&\
-        unzip -q develop.zip  &&\
-        mv /fletcher-develop /fletcher &&\
-        rm -f develop.zip && \
+RUN wget -q https://github.com/abs-tudelft/fletcher/archive/0.0.11.zip &&\
+        unzip -q 0.0.11.zip  &&\
+        mv /fletcher-0.0.11 /fletcher &&\
+        rm -f 0.0.11.zip && \
 # Install Fletcher Runtime \
         mkdir /fletcher/runtime/cpp/build &&\
         cd /fletcher/runtime/cpp/build &&\
@@ -75,4 +75,4 @@ ENV LOCAL_LIBRARY_PATH /usr/local/lib
 VOLUME /app
 WORKDIR /app
 
-CMD []
+CMD ["/bin/bash"]
